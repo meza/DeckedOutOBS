@@ -98,8 +98,8 @@ This project is licensed under the GPL-3 License.
 
 ## Disclaimer
 
-The card artwork and anything Decked Out 2 related is the intellectual property of TangoTek.
-The artwork has been extracted from the world download of the Hermitcraft Season 9 server.
+The card artwork has been created for TangoTek by [CJ Moseley](https://cjmoseley.co.uk/) and has been 
+extracted from the world download of the Hermitcraft Season 9 server for this project.
 
 ---
 
