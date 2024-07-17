@@ -44,6 +44,9 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
+      - name: "🔓 Adjust the release permissions"
+        run: chmod a+x ./scripts/release.sh && chmod +x ./gradlew
+
       - name: "✅ Run Tests"
         run: ./gradlew test
 
@@ -51,9 +54,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: "🔓 Adjust the release permissions"
-        run: chmod a+x ./scripts/release.sh && chmod +x ./gradlew
 
       - name: "🧵 Install semantic release"
         run: npm i --location=global semantic-release conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data
