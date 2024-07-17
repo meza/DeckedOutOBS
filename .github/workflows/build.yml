@@ -44,6 +44,9 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
+      - name: "✅ Run Tests"
+        run: ./gradlew test
+
       - name: "🔃 Use Latest Node.js"
         uses: actions/setup-node@v4
         with:
