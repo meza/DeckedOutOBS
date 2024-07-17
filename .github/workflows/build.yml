@@ -47,7 +47,7 @@ jobs:
       - name: "🔃 Use Latest Node.js"
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: 20
 
       - name: "🔓 Adjust the release permissions"
         run: chmod a+x ./scripts/release.sh && chmod +x ./gradlew
