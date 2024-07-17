@@ -11,6 +11,7 @@ to see the cards being played while you're running the dungeon.
 
 - **Client-Side Only**: No need to install the mod on servers.
 - **Card Callouts**: Displays the cards being played in real-time through an OBS Browser Source.
+- **Flexible**: You can resize and move the browser source card as you wish.
 - **Easy Calibration**: Simple setup with in-game commands, no permissions needed.
 - **Customizable Port**: Change the server port number if needed.
 
