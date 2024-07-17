@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>stateshifters/renovate-common"
+  ],
+  "enabledManagers": [
+    "npm",
+    "github-actions",
+    "gradle",
+    "gradle-wrapper"
+  ]
+}
