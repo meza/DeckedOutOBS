@@ -16,7 +16,7 @@ to see the cards being played while you're running the dungeon.
 
 ## Installation
 
-1. **Download and Install the Mod**: Place the DeckedOutOBS mod file into your Minecraft `mods` folder.
+1. **Download and Install the Mod**: Place the [DeckedOutOBS mod](https://modrinth.com/mod/deckedoutobs) file into your Minecraft `mods` folder.
 2. **Download and Install the Fabric API**: Download and install the [Fabric API mod](https://modrinth.com/mod/fabric-api).
 3. **Launch Minecraft**: Start your Minecraft client with the mod installed.
 
