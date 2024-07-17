@@ -1,0 +1,55 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "tagFormat": "v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    "semantic-release-export-data",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": ":tada: This issue has been resolved in version ${nextRelease.version} :tada:\\n\\nThe release is available on [GitHub release](<github_release_url>)",
+        "assets": [
+          {
+            "path": "versions/1.20.1/build/libs/!(*-@(dev|sources|shadow)).jar",
+            "name": "DeckedOutOBS-1.20.1-${nextRelease.gitTag}.jar",
+            "label": "DeckedOutOBS-1.20.1-${nextRelease.gitTag}.jar"
+          },
+          {
+            "path": "versions/1.21/build/libs/!(*-@(dev|sources|shadow)).jar",
+            "name": "DeckedOutOBS-1.21-${nextRelease.gitTag}.jar",
+            "label": "DeckedOutOBS-1.21-${nextRelease.gitTag}.jar"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "./scripts/release.sh \"${nextRelease.version}\""
+      }
+    ]
+  ]
+}

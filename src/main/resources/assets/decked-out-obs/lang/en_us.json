@@ -1,0 +1,16 @@
+{
+  "message.server_started": "Decked Out Server started on port %d",
+  "message.server_stopped": "Decked Out Server stopped",
+  "message.obs_source": "Your OBS Browser Source url is %s",
+  "message.calibration_failed": "Could not determine the dungeon layout. Are you setting the correct barrel?",
+  "system.processing": "Dungeon not set, skipping card callout processing and not starting the server.",
+  "system.disconnect": "Client disconnected from server, stopping the http server.",
+  "system.playing_card": "Playing sound: %s",
+  "system.resetting": "Processed IDs have been reset.",
+  "system.setting_dungeon": "Setting key barrel at %s",
+  "message.current_dungeon": "The dungeon is at: %s facing: %s",
+  "message.port_in_use": "Port %d is already in use, choose another one",
+  "message.current_port": "Current server port is: %d",
+  "system.same_port": "Server already running on port %d",
+  "system.changing_ports": "Changing ports from %d to %d, stopping the server."
+}

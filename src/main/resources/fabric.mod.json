@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "decked-out-obs",
+	"version": "${version}",
+	"name": "Decked Out OBS",
+	"description": "Adds an OBS BrowserSource for decked out card announcements!",
+	"authors": [
+		"Meza"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/meza/decked-out-obs"
+	},
+	"license": "LGPL-3.0",
+	"icon": "assets/decked-out-obs/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+      "gg.meza.doobs.DeckedOutOBS"
+		]
+	},
+	"mixins": [],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": ">=${minecraft_version}",
+		"java": ">=${java_version}",
+		"fabric-api": "*"
+	},
+	"suggests": {
+	}
+}
