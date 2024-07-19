@@ -6,9 +6,6 @@
 name: build
 on:
   push:
-    branches:
-      - main
-      - beta
 
 permissions:
   issues: write
