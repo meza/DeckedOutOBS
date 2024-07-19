@@ -3,6 +3,7 @@ package gg.meza.doobs;
 import gg.meza.doobs.cardProcessing.AudioEvent;
 import gg.meza.doobs.commands.DungeonSetCommand;
 import gg.meza.doobs.commands.ServerPortCommand;
+import gg.meza.doobs.data.CardQueueManager;
 import gg.meza.doobs.data.Settings;
 import gg.meza.doobs.server.BasicHttpServer;
 import net.fabricmc.api.ClientModInitializer;
@@ -16,13 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class DeckedOutOBS implements ClientModInitializer {
     public static Settings settings;
     public static final Logger LOGGER = LoggerFactory.getLogger("decked-out-obs");
-    private BasicHttpServer httpServer = new BasicHttpServer();
-    private AudioEvent audioEvent;
+    private final CardQueueManager queueManager = new CardQueueManager();
+    private final BasicHttpServer httpServer = new BasicHttpServer(queueManager);
     private MinecraftClient client;
+    public static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     @Override
     public void onInitializeClient() {
@@ -56,7 +60,7 @@ public class DeckedOutOBS implements ClientModInitializer {
             LOGGER.info(Text.translatable("system.processing").getString());
             return;
         }
-        audioEvent = new AudioEvent(httpServer, settings.getDungeonPosition());
+        AudioEvent audioEvent = new AudioEvent(queueManager, settings.getDungeonPosition());
         httpServer.startServer(settings.getPort());
 
         if (this.client.player != null) {

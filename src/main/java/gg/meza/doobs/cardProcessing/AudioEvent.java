@@ -1,8 +1,8 @@
 package gg.meza.doobs.cardProcessing;
 
 import gg.meza.doobs.DeckedOutOBS;
+import gg.meza.doobs.data.CardQueueManager;
 import gg.meza.doobs.data.Location;
-import gg.meza.doobs.server.BasicHttpServer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.JukeboxBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -23,11 +23,11 @@ public class AudioEvent {
     private final Set<String> processedIds = new HashSet<>();
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> futureTask = null;
-    private final BasicHttpServer basicHttpServer;
+    private final CardQueueManager queueManager;
     private final Location dungeon;
 
-    public AudioEvent(BasicHttpServer basicHttpServer, Location dungeon) {
-        this.basicHttpServer = basicHttpServer;
+    public AudioEvent(CardQueueManager queue, Location dungeon) {
+        this.queueManager = queue;
         this.dungeon = dungeon;
     }
 
@@ -39,15 +39,14 @@ public class AudioEvent {
             if (potentialJukebox == null) {
                 return;
             }
-            if (potentialJukebox instanceof JukeboxBlockEntity) {
-                JukeboxBlockEntity jukebox = (JukeboxBlockEntity) potentialJukebox;
+            if (potentialJukebox instanceof JukeboxBlockEntity jukebox) {
                 BlockState cs = jukebox.getCachedState();
                 if (cs.get(JukeboxBlock.HAS_RECORD)) {
                     if (processedIds.contains(sound)) {
                         resetTimer();
                         return;
                     }
-                    basicHttpServer.queueCard(sound);
+                    queueManager.queueCard(sound);
                     DeckedOutOBS.LOGGER.debug(Text.translatable("system.playing_card", sound).getString());
                     processedIds.add(sound);
                 }
