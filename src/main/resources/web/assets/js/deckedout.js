@@ -1,3 +1,5 @@
+const session = document.body.getAttribute('data-sessionId');
+
 const createCard = (card) => {
   const enclosure = document.createElement('div');
   enclosure.classList.add('docard');
@@ -18,7 +20,13 @@ const showCard = (card) => {
 
 
 const getNextCard = () => {
-  fetch('/nextCard')
+  fetch('/nextCard', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Session': session
+    }
+  })
     .then(response => response.json())
     .then(data => {
       if (data.hasCard) {

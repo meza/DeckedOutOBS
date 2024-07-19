@@ -6,7 +6,6 @@ import gg.meza.doobs.DeckedOutOBS;
 import gg.meza.doobs.data.Location;
 import gg.meza.doobs.data.Settings;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.block.HopperBlock;
 import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.command.argument.DefaultPosArgument;

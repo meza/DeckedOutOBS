@@ -51,10 +51,6 @@ show up in the OBS Browser Source.
 
 You can open up the OBS Browser Source URL in a normal browser too and use it as a dungeon companion.
 
-> [!CAUTION]
-> Currently the cards will only show up on ONE open browser tab / browser source at a time.
-> If you are streaming, close all other tabs with the URL to ensure the cards show up in OBS.
-
 ## Commands
 
 ### Set Dungeon Key Barrel Position
