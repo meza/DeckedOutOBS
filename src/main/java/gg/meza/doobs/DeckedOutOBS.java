@@ -3,6 +3,7 @@ package gg.meza.doobs;
 import gg.meza.doobs.cardProcessing.AudioEvent;
 import gg.meza.doobs.commands.DungeonSetCommand;
 import gg.meza.doobs.commands.ServerPortCommand;
+import gg.meza.doobs.data.CardQueue;
 import gg.meza.doobs.data.Settings;
 import gg.meza.doobs.server.BasicHttpServer;
 import net.fabricmc.api.ClientModInitializer;
@@ -20,7 +21,8 @@ import java.util.Objects;
 public class DeckedOutOBS implements ClientModInitializer {
     public static Settings settings;
     public static final Logger LOGGER = LoggerFactory.getLogger("decked-out-obs");
-    private BasicHttpServer httpServer = new BasicHttpServer();
+    private CardQueue queue = new CardQueue();
+    private BasicHttpServer httpServer = new BasicHttpServer(queue);
     private AudioEvent audioEvent;
     private MinecraftClient client;
 
@@ -56,7 +58,7 @@ public class DeckedOutOBS implements ClientModInitializer {
             LOGGER.info(Text.translatable("system.processing").getString());
             return;
         }
-        audioEvent = new AudioEvent(httpServer, settings.getDungeonPosition());
+        audioEvent = new AudioEvent(queue, settings.getDungeonPosition());
         httpServer.startServer(settings.getPort());
 
         if (this.client.player != null) {

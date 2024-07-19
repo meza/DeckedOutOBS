@@ -1,6 +1,7 @@
 package gg.meza.doobs.cardProcessing;
 
 import gg.meza.doobs.DeckedOutOBS;
+import gg.meza.doobs.data.CardQueue;
 import gg.meza.doobs.data.Location;
 import gg.meza.doobs.server.BasicHttpServer;
 import net.minecraft.block.BlockState;
@@ -23,11 +24,11 @@ public class AudioEvent {
     private final Set<String> processedIds = new HashSet<>();
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> futureTask = null;
-    private final BasicHttpServer basicHttpServer;
+    private final CardQueue queue;
     private final Location dungeon;
 
-    public AudioEvent(BasicHttpServer basicHttpServer, Location dungeon) {
-        this.basicHttpServer = basicHttpServer;
+    public AudioEvent(CardQueue queue, Location dungeon) {
+        this.queue = queue;
         this.dungeon = dungeon;
     }
 
@@ -47,7 +48,7 @@ public class AudioEvent {
                         resetTimer();
                         return;
                     }
-                    basicHttpServer.queueCard(sound);
+                    queue.addCard(sound);
                     DeckedOutOBS.LOGGER.debug(Text.translatable("system.playing_card", sound).getString());
                     processedIds.add(sound);
                 }

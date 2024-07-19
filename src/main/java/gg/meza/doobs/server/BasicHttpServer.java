@@ -3,25 +3,21 @@ package gg.meza.doobs.server;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import gg.meza.doobs.DeckedOutOBS;
+import gg.meza.doobs.data.CardQueue;
 import net.minecraft.text.Text;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.charset.StandardCharsets;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class BasicHttpServer {
     private HttpServer server;
-    private Queue<String> queue = new ConcurrentLinkedDeque<>();
+    private final CardQueue queue;
     private int lastPort = 0;
 
-    public BasicHttpServer() {
-    }
-
-    public void queueCard(String card) {
-        queue.add(card);
+    public BasicHttpServer(CardQueue queue) {
+        this.queue = queue;
     }
 
     public void startServer(int port) {
@@ -55,12 +51,12 @@ public class BasicHttpServer {
 
     private void handleNextCard(HttpExchange exchange) throws IOException {
         String response;
-        if (!queue.isEmpty()) {
-            String nextQueueItem = queue.poll();
+        String nextQueueItem = queue.nextCard();
+        if (nextQueueItem == null) {
+            response = "{\"card\": \"\", \"hasCard\": false}";
+        } else {
             response = "{\"card\": \"" + nextQueueItem + "\", \"hasCard\": true}";
             DeckedOutOBS.LOGGER.info("Sending card: {}", nextQueueItem);
-        } else {
-            response = "{\"card\": \"\", \"hasCard\": false}";
         }
 
         exchange.getResponseHeaders().set("Content-Type", "application/json");
