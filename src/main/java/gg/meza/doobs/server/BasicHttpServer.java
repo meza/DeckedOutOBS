@@ -70,7 +70,7 @@ public class BasicHttpServer {
 
     private void handleIndex(HttpExchange exchange) throws IOException {
         Session currentSession = getSession(exchange); // ensure cookie exists
-        String response = readFile("/web/index.html").replace("X-Session", currentSession.getSessionId());
+        String response = readFile("/assets/decked-out-obs/web/index.html").replace("X-Session", currentSession.getSessionId());
         exchange.getResponseHeaders().set("Content-Type", "text/html");
         exchange.sendResponseHeaders(200, response.getBytes(StandardCharsets.UTF_8).length);
         try (OutputStream os = exchange.getResponseBody()) {
@@ -84,7 +84,7 @@ public class BasicHttpServer {
     }
 
     private void handleAssets(HttpExchange exchange) throws IOException {
-        String filePath = exchange.getRequestURI().getPath().replaceFirst("/assets", "/web/assets");
+        String filePath = exchange.getRequestURI().getPath().replaceFirst("/assets", "/assets/decked-out-obs/web/assets");
         sendAsset(exchange, filePath);
     }
 
