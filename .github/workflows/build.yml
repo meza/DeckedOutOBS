@@ -117,7 +117,7 @@ jobs:
             fabric
             quilt
           game-versions: |
-            1.21
+            >=1.21
           java: |
             21
           dependencies: |
