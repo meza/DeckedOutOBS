@@ -46,9 +46,9 @@ public class AudioEvent {
                         resetTimer();
                         return;
                     }
+                    processedIds.add(sound);
                     queueManager.queueCard(sound);
                     DeckedOutOBS.LOGGER.debug(Text.translatable("system.playing_card", sound).getString());
-                    processedIds.add(sound);
                 }
             }
         });

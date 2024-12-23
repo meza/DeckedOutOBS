@@ -33,14 +33,7 @@
         "successComment": ":tada: This issue has been resolved in version ${nextRelease.version} :tada:\\n\\nThe release is available on [GitHub release](<github_release_url>)",
         "assets": [
           {
-            "path": "versions/1.20.1/build/libs/!(*-@(dev|sources|shadow)).jar",
-            "name": "DeckedOutOBS-1.20.1-${nextRelease.gitTag}.jar",
-            "label": "DeckedOutOBS-1.20.1-${nextRelease.gitTag}.jar"
-          },
-          {
-            "path": "versions/1.21/build/libs/!(*-@(dev|sources|shadow)).jar",
-            "name": "DeckedOutOBS-1.21-${nextRelease.gitTag}.jar",
-            "label": "DeckedOutOBS-1.21-${nextRelease.gitTag}.jar"
+            "path": "build/libs/*.jar"
           }
         ]
       }

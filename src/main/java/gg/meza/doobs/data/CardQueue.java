@@ -22,6 +22,7 @@ public class CardQueue {
     }
 
     public String nextCard() {
+        DeckedOutOBS.LOGGER.info("Next card requested");
         TimedCard timedCard = queue.poll();
         return (timedCard != null) ? timedCard.getCard() : null;
     }
