@@ -9,6 +9,8 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.command.argument.DefaultPosArgument;
+//? if >= 1.21.4
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -45,7 +47,12 @@ public class DungeonSetCommand {
 
     // Client version of BlockPosArgument.getBlockPos
     private static BlockPos getBlockPos(CommandContext<FabricClientCommandSource> context, String name) {
-        return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(context.getSource().getPlayer().getCommandSource());
+        //? if < 1.21.4 {
+        /*return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(context.getSource().getPlayer().getCommandSource());
+        *///?} else {
+        ServerCommandSource s = new ServerCommandSource(null, context.getSource().getPosition(), context.getSource().getRotation(), null, 0, null, null, null, null);
+        return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(s);
+       //?}
     }
 
     private static Direction getDungeonDirection(CommandContext<FabricClientCommandSource> context, BlockPos dungeonCenter) {
