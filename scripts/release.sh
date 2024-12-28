@@ -5,4 +5,4 @@ VERSION=$1
 echo "Replacing version with ${VERSION}"
 sed -e "s/0.0-SNAPSHOT/${VERSION}/" -i gradle.properties
 
-./gradlew chiseledBuild -x test # we've ran the tests earlier in the build
+./gradlew chiseledBuildAndCollect chiseledPublishMods --no-daemon

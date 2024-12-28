@@ -3,6 +3,13 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven("https://maven.fabricmc.net/")
+        maven("https://maven.architectury.dev")
+        maven("https://maven.minecraftforge.net")
+        maven("https://maven.neoforged.net/releases/")
+        maven("https://maven.kikugie.dev/releases")
+        maven("https://maven.kikugie.dev/snapshots")
+        maven("https://maven.terraformersmc.com/")
+        maven("https://maven.shedaniel.me/")
     }
 }
 
@@ -11,13 +18,20 @@ plugins {
 }
 
 stonecutter {
-    kotlinController = true
     centralScript = "build.gradle.kts"
+    kotlinController = true
+    shared {
+        fun mc(version: String, vararg loaders: String) {
+            for (it in loaders) vers("$version-$it", version)
+        }
 
-    create(rootProject) {
-        versions("1.20.1", "1.21", "1.21.4")
-        vcsVersion = "1.21.4"
+        mc("1.20.1", "fabric")
+        mc("1.21", "fabric")
+        mc("1.21.4", "fabric")
+
+        vcsVersion = "1.21.4-fabric"
     }
+    create(rootProject)
 }
 
-rootProject.name = "DeckedOutObs"
+rootProject.name = "DeckedOutOBS"
