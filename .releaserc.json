@@ -53,10 +53,7 @@
           {
             "title": "What changed?",
             "description": "${nextRelease.notes}",
-            "color": 7377919,
-            "footer": {
-              "text": "Curseforge might take a few hours to approve the file so if you want to download it immediately, use the Modrinth link."
-            }
+            "color": 7377919
           }
         ],
         "components": [
