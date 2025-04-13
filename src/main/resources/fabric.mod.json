@@ -18,6 +18,14 @@
       "gg.meza.doobs.DeckedOutOBS"
 		]
 	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"${id}.discord": "https://discord.gg/dvg3tcQCPW",
+				"${id}.support": "https://ko-fi.com/meza"
+			}
+		}
+	},
 	"mixins": [],
 	"depends": {
 		"fabricloader": "*",

@@ -101,3 +101,11 @@ extracted from the world download of the Hermitcraft Season 9 server for this pr
 ---
 
 **Enjoy running the Decked Out dungeon with enhanced visuals for your audience!**
+
+
+## Credits
+
+Thanks to all the supporters who make this project possible!
+
+<!-- marker:patrons-start -->
+<!-- marker:patrons-end -->

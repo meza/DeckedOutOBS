@@ -12,5 +12,7 @@
   "message.port_in_use": "Port %d is already in use, choose another one",
   "message.current_port": "Current server port is: %d",
   "system.same_port": "Server already running on port %d",
-  "system.changing_ports": "Changing ports from %d to %d, stopping the server."
+  "system.changing_ports": "Changing ports from %d to %d, stopping the server.",
+  "gg.meza.doobs.discord" : "Discord",
+  "gg.meza.doobs.support" : "Support on Ko-fi"
 }
