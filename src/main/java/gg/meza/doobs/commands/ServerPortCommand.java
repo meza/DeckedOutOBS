@@ -20,7 +20,7 @@ public class ServerPortCommand {
                 .executes(context -> {
                     int port = IntegerArgumentType.getInteger(context, "serverPort");
                     if ((!BasicHttpServer.isPortAvailable(port)) && (port != settings.getPort())) {
-                        context.getSource().getPlayer().sendMessage(Text.translatable("message.port_in_use", port), false);
+                        context.getSource().getPlayer().sendMessage(Text.translatable("decked-out-obs.message.port_in_use", port), false);
                         return 0;
                     }
 
@@ -33,7 +33,7 @@ public class ServerPortCommand {
                 literal("deckedout")
                 .then(literal("port")
                 .executes(context -> {
-                    context.getSource().getPlayer().sendMessage(Text.translatable("message.current_port", settings.getPort()), false);
+                    context.getSource().getPlayer().sendMessage(Text.translatable("decked-out-obs.message.current_port", settings.getPort()), false);
                     return 1;
                 })));
     }

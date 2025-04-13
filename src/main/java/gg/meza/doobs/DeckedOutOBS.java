@@ -44,7 +44,7 @@ public class DeckedOutOBS implements ClientModInitializer {
         });
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            DeckedOutOBS.LOGGER.info(Text.translatable("system.disconnect").getString());
+            DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.system.disconnect").getString());
             httpServer.stopServer();
             settings = null;
         });
@@ -57,15 +57,15 @@ public class DeckedOutOBS implements ClientModInitializer {
 
     private void beginProcessing() {
         if (!settings.isDungeonSet()) {
-            LOGGER.info(Text.translatable("system.processing").getString());
+            LOGGER.info(Text.translatable("decked-out-obs.system.processing").getString());
             return;
         }
         AudioEvent audioEvent = new AudioEvent(queueManager, settings.getDungeonPosition());
         httpServer.startServer(settings.getPort());
 
         if (this.client.player != null) {
-            this.client.player.sendMessage(Text.translatable("message.server_started", settings.getPort()), false);
-            this.client.player.sendMessage(Text.translatable("message.obs_source", "http://localhost:" + settings.getPort()), false);
+            this.client.player.sendMessage(Text.translatable("decked-out-obs.message.server_started", settings.getPort()), false);
+            this.client.player.sendMessage(Text.translatable("decked-out-obs.message.obs_source", "http://localhost:" + settings.getPort()), false);
         }
 
         ClientTickEvents.END_WORLD_TICK.register(audioEvent::processBlocks);

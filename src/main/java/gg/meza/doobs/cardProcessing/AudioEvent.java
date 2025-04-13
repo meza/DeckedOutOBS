@@ -48,7 +48,7 @@ public class AudioEvent {
                     }
                     processedIds.add(sound);
                     queueManager.queueCard(sound);
-                    DeckedOutOBS.LOGGER.debug(Text.translatable("system.playing_card", sound).getString());
+                    DeckedOutOBS.LOGGER.debug(Text.translatable("decked-out-obs.system.playing_card", sound).getString());
                 }
             }
         });
@@ -64,7 +64,7 @@ public class AudioEvent {
 
     public void resetProcessedIds() {
         processedIds.clear();
-        DeckedOutOBS.LOGGER.debug(Text.translatable("system.resetting").getString());
+        DeckedOutOBS.LOGGER.debug(Text.translatable("decked-out-obs.system.resetting").getString());
     }
 
 }

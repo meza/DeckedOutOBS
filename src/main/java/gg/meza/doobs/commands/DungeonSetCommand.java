@@ -28,7 +28,7 @@ public class DungeonSetCommand {
                 .then(argument("keyBarrel", blockPos())
                 .executes(context -> {
                     BlockPos pos = getBlockPos(context, "keyBarrel");
-                    DeckedOutOBS.LOGGER.info(Text.translatable("system.setting_dungeon", pos).getString());
+                    DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.system.setting_dungeon", pos).getString());
                     settings.setDungeonPosition(pos, getDungeonDirection(context, pos));
                     beginProcessing.run();
                     return 1;
@@ -40,7 +40,7 @@ public class DungeonSetCommand {
                 .executes(context -> {
                     Location dungeon = settings.getDungeonPosition();
                     context.getSource().getPlayer().sendMessage(
-                            Text.translatable("message.current_dungeon", dungeon.dungeonLocation().toShortString(), dungeon.dungeonDirection()), false);
+                            Text.translatable("decked-out-obs.message.current_dungeon", dungeon.dungeonLocation().toShortString(), dungeon.dungeonDirection()), false);
                     return 1;
                 })));
     }
@@ -64,6 +64,6 @@ public class DungeonSetCommand {
         if(world.getBlockState(hopper.north()).getBlock() instanceof RedstoneTorchBlock) return Direction.SOUTH;
         if(world.getBlockState(hopper.south()).getBlock() instanceof RedstoneTorchBlock) return Direction.NORTH;
 
-        throw new IllegalArgumentException(Text.translatable("message.calibration_failed").getString());
+        throw new IllegalArgumentException(Text.translatable("decked-out-obs.message.calibration_failed").getString());
     }
 }
