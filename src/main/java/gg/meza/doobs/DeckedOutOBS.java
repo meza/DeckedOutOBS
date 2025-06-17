@@ -27,6 +27,8 @@ public class DeckedOutOBS implements ClientModInitializer {
     private final BasicHttpServer httpServer = new BasicHttpServer(queueManager);
     private MinecraftClient client;
     public static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private AudioEvent audioEvent;
+    private boolean tickRegistered;
 
     @Override
     public void onInitializeClient() {
@@ -60,15 +62,22 @@ public class DeckedOutOBS implements ClientModInitializer {
             LOGGER.info(Text.translatable("decked-out-obs.system.processing").getString());
             return;
         }
-        AudioEvent audioEvent = new AudioEvent(queueManager, settings.getDungeonPosition());
-        httpServer.startServer(settings.getPort());
+
+        if (audioEvent == null) {
+            audioEvent = new AudioEvent(queueManager, settings.getDungeonPosition());
+        }
 
         if (this.client.player != null) {
             this.client.player.sendMessage(Text.translatable("decked-out-obs.message.server_started", settings.getPort()), false);
             this.client.player.sendMessage(Text.translatable("decked-out-obs.message.obs_source", "http://localhost:" + settings.getPort()), false);
         }
 
-        ClientTickEvents.END_WORLD_TICK.register(audioEvent::processBlocks);
+        if (!tickRegistered) {
+            ClientTickEvents.END_WORLD_TICK.register(audioEvent::processBlocks);
+            tickRegistered = true;
+        }
+
+        httpServer.startServer(settings.getPort());
     }
 
 }
