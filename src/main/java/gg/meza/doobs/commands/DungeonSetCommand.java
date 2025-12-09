@@ -47,15 +47,19 @@ public class DungeonSetCommand {
 
     // Client version of BlockPosArgument.getBlockPos
     private static BlockPos getBlockPos(CommandContext<FabricClientCommandSource> context, String name) {
-        //? if >= 1.21.11 {
-        ServerCommandSource s = new ServerCommandSource(null, context.getSource().getPosition(), context.getSource().getRotation(), null, perm -> false, null, null, null, null);
 
-        //?} else if < 1.21.4 {
-        /*return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(context.getSource().getPlayer().getCommandSource());
-        *///?} else {
+        /*? if >= 1.21.4 { */
+
+        /*? if >= 1.21.11 { */
+        ServerCommandSource s = new ServerCommandSource(null, context.getSource().getPosition(), context.getSource().getRotation(), null, perm -> false, null, null, null, null);
+        /*? } else {*/
         /*ServerCommandSource s = new ServerCommandSource(null, context.getSource().getPosition(), context.getSource().getRotation(), null, 0, null, null, null, null);
-        *///?}
+        *//*? } */
         return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(s);
+        /*? } else {*/
+
+        /*return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(context.getSource().getPlayer().getCommandSource());
+        *//*?}*/
     }
 
     private static Direction getDungeonDirection(CommandContext<FabricClientCommandSource> context, BlockPos dungeonCenter) {

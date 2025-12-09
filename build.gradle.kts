@@ -16,6 +16,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5+")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5+")
+    testImplementation(libs.junit)
+    testImplementation(libs.junit.api)
+    testRuntimeOnly(libs.junit.launcher)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
