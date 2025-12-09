@@ -52,7 +52,7 @@ jobs:
         run: npm i --location=global semantic-release semantic-release-discord-notifier conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data
 
       - name: "🧪 Test"
-        run: ./gradlew chiseledTest
+        run: ./gradlew test
 
       - name: "🏗️ Build & Release"
         id: release
@@ -66,7 +66,7 @@ jobs:
 
       - name: "🧪 Run Dev Build"
         if: ${{ steps.release.outputs.new-release-published != 'true' }}
-        run: ./gradlew chiseledBuildAndCollect
+        run: ./gradlew buildAndCollect
 
       - name: "🕵️‍♂️ Collect jars"
         uses: actions/upload-artifact@v4
