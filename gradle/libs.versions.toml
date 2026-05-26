@@ -1,7 +1,7 @@
 [versions]
-junit = "6.0.3"
-junit-api = "6.0.3"
-junit-launcher = "6.0.3"
+junit = "6.1.0"
+junit-api = "6.1.0"
+junit-launcher = "6.1.0"
 
 [libraries]
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
