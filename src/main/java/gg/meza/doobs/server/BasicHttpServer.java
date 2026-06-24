@@ -5,8 +5,6 @@ import com.sun.net.httpserver.HttpServer;
 import gg.meza.doobs.DeckedOutOBS;
 import gg.meza.doobs.data.CardQueue;
 import gg.meza.doobs.data.CardQueueManager;
-import net.minecraft.text.Text;
-
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -16,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import net.minecraft.network.chat.Component;
 
 public class BasicHttpServer {
     private final CardQueueManager cardQueueManager;
@@ -30,12 +29,12 @@ public class BasicHttpServer {
 
     public void startServer(int port) {
         if ((server != null) && (port != this.lastPort)) {
-            DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.system.changing_ports", this.lastPort, port).getString());
+            DeckedOutOBS.LOGGER.info(Component.translatable("decked-out-obs.system.changing_ports", this.lastPort, port).getString());
             server.stop(0);
         }
 
         if ((server != null) && (port == this.lastPort)) {
-            DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.system.same_port", port).getString());
+            DeckedOutOBS.LOGGER.info(Component.translatable("decked-out-obs.system.same_port", port).getString());
             return;
         }
 
@@ -48,7 +47,7 @@ public class BasicHttpServer {
             server.createContext("/nextCard", this::handleNextCard);
             server.start();
 
-            DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.message.server_started", port).getString());
+            DeckedOutOBS.LOGGER.info(Component.translatable("decked-out-obs.message.server_started", port).getString());
         } catch (IOException var1) {
             throw new RuntimeException(var1);
         }
@@ -57,7 +56,7 @@ public class BasicHttpServer {
     public void stopServer() {
         server.stop(0);
         server = null;
-        DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.message.server_stopped").getString());
+        DeckedOutOBS.LOGGER.info(Component.translatable("decked-out-obs.message.server_stopped").getString());
     }
 
     public static boolean isPortAvailable(int port) {

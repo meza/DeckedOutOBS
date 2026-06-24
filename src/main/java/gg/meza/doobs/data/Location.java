@@ -1,7 +1,7 @@
 package gg.meza.doobs.data;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
 public record Location(Direction dungeonDirection, BlockPos dungeonLocation) {
 }

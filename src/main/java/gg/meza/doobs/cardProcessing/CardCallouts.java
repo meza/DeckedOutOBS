@@ -1,12 +1,11 @@
 package gg.meza.doobs.cardProcessing;
 
 import gg.meza.doobs.data.Location;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 
 public class CardCallouts {
 
@@ -70,7 +69,7 @@ public class CardCallouts {
         Map<BlockPos, String> callouts = new ConcurrentHashMap<>();
         for (Map.Entry<Vec3i, String> callout : relative.entrySet()) {
             Vec3i relativePos = getRelativePosition(dungeonLocation.dungeonDirection(), callout);
-            BlockPos absolutePos = dungeonLocation.dungeonLocation().add(relativePos);
+            BlockPos absolutePos = dungeonLocation.dungeonLocation().offset(relativePos);
             callouts.put(absolutePos, callout.getValue());
         }
 

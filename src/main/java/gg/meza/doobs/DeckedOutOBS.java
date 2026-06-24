@@ -10,9 +10,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.storage.LevelResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class DeckedOutOBS implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("decked-out-obs");
     private final CardQueueManager queueManager = new CardQueueManager();
     private final BasicHttpServer httpServer = new BasicHttpServer(queueManager);
-    private MinecraftClient client;
+    private Minecraft client;
     public static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private AudioEvent audioEvent;
     private boolean tickRegistered;
@@ -34,10 +34,10 @@ public class DeckedOutOBS implements ClientModInitializer {
     public void onInitializeClient() {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             String currentServer;
-            if (client.isConnectedToLocalServer()) {
-                currentServer = Objects.requireNonNull(client.getServer()).getSavePath(WorldSavePath.ROOT).getParent().getFileName().toString();
+            if (client.isSingleplayer()) {
+                currentServer = Objects.requireNonNull(client.getSingleplayerServer()).getWorldPath(LevelResource.ROOT).getParent().getFileName().toString();
             } else {
-                currentServer = Objects.requireNonNull(client.getCurrentServerEntry()).address;
+                currentServer = Objects.requireNonNull(client.getCurrentServer()).ip;
             }
             this.client = client;
             settings = new Settings(currentServer);
@@ -46,7 +46,7 @@ public class DeckedOutOBS implements ClientModInitializer {
         });
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            DeckedOutOBS.LOGGER.info(Text.translatable("decked-out-obs.system.disconnect").getString());
+            DeckedOutOBS.LOGGER.info(Component.translatable("decked-out-obs.system.disconnect").getString());
             httpServer.stopServer();
             settings = null;
         });
@@ -59,7 +59,7 @@ public class DeckedOutOBS implements ClientModInitializer {
 
     private void beginProcessing() {
         if (!settings.isDungeonSet()) {
-            LOGGER.info(Text.translatable("decked-out-obs.system.processing").getString());
+            LOGGER.info(Component.translatable("decked-out-obs.system.processing").getString());
             return;
         }
 
@@ -68,8 +68,8 @@ public class DeckedOutOBS implements ClientModInitializer {
         }
 
         if (this.client.player != null) {
-            this.client.player.sendMessage(Text.translatable("decked-out-obs.message.server_started", settings.getPort()), false);
-            this.client.player.sendMessage(Text.translatable("decked-out-obs.message.obs_source", "http://localhost:" + settings.getPort()), false);
+            this.client.player.displayClientMessage(Component.translatable("decked-out-obs.message.server_started", settings.getPort()), false);
+            this.client.player.displayClientMessage(Component.translatable("decked-out-obs.message.obs_source", "http://localhost:" + settings.getPort()), false);
         }
 
         if (!tickRegistered) {

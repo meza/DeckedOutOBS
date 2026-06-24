@@ -15,24 +15,16 @@ pluginManagement {
 }
 
 plugins {
-    id("gg.meza.stonecraft") version "1.10.14"
-    id("dev.kikugie.stonecutter") version "0.9.6"
+    id("gg.meza.stonecraft") version "1.12.+"
+    id("dev.kikugie.stonecutter") version "0.9.+"
 }
 
 stonecutter {
-//    centralScript = "build.gradle.kts"
-//    kotlinController = true
     shared {
         fun mc(version: String, vararg loaders: String) {
             for (it in loaders) version("$version-$it", version)
         }
 
-        mc("1.20.1", "fabric")
-        mc("1.21", "fabric")
-        mc("1.21.4", "fabric")
-        mc("1.21.5", "fabric")
-        mc("1.21.6", "fabric")
-        mc("1.21.9", "fabric")
         mc("1.21.11", "fabric")
 
         vcsVersion = "1.21.11-fabric"
