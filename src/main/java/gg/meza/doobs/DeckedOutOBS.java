@@ -34,7 +34,10 @@ public class DeckedOutOBS implements ClientModInitializer {
     public void onInitializeClient() {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             String currentServer;
-            if (client.isSingleplayer()) {
+            //? >= 26.2
+            if (client.hasSingleplayerServer()) {
+            //? < 26.2
+            //if (client.isSingleplayer()) {
                 currentServer = Objects.requireNonNull(client.getSingleplayerServer()).getWorldPath(LevelResource.ROOT).getParent().getFileName().toString();
             } else {
                 currentServer = Objects.requireNonNull(client.getCurrentServer()).ip;
