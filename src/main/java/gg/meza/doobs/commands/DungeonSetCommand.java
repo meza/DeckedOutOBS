@@ -14,8 +14,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.RedstoneTorchBlock;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.argument;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.literal;
 import static net.minecraft.commands.arguments.coordinates.BlockPosArgument.blockPos;
 
 public class DungeonSetCommand {
@@ -38,31 +38,21 @@ public class DungeonSetCommand {
                 .then(literal("dungeon")
                 .executes(context -> {
                     Location dungeon = settings.getDungeonPosition();
-                    context.getSource().getPlayer().displayClientMessage(
-                            Component.translatable("decked-out-obs.message.current_dungeon", dungeon.dungeonLocation().toShortString(), dungeon.dungeonDirection()), false);
+                    context.getSource().getPlayer().sendSystemMessage(
+                            Component.translatable("decked-out-obs.message.current_dungeon", dungeon.dungeonLocation().toShortString(), dungeon.dungeonDirection()));
                     return 1;
                 })));
     }
 
     // Client version of BlockPosArgument.getBlockPos
     private static BlockPos getBlockPos(CommandContext<FabricClientCommandSource> context, String name) {
-
-        /*? if >= 1.21.4 { */
-
-        /*? if >= 1.21.11 { */
         CommandSourceStack s = new CommandSourceStack(null, context.getSource().getPosition(), context.getSource().getRotation(), null, perm -> false, null, null, null, null);
-        /*? } else {*/
-        /*ServerCommandSource s = new ServerCommandSource(null, context.getSource().getPosition(), context.getSource().getRotation(), null, 0, null, null, null, null);
-        *//*? } */
-        return context.getArgument(name, WorldCoordinates.class).getBlockPos(s);
-        /*? } else {*/
 
-        /*return context.getArgument(name, DefaultPosArgument.class).toAbsoluteBlockPos(context.getSource().getPlayer().getCommandSource());
-        *//*?}*/
+        return context.getArgument(name, WorldCoordinates.class).getBlockPos(s);
     }
 
     private static Direction getDungeonDirection(CommandContext<FabricClientCommandSource> context, BlockPos dungeonCenter) {
-        ClientLevel world = context.getSource().getWorld();
+        ClientLevel world = context.getSource().getLevel();
         BlockPos hopper = dungeonCenter.below();
 
         if(world.getBlockState(hopper.east()).getBlock() instanceof RedstoneTorchBlock) return Direction.WEST;

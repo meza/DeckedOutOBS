@@ -1,0 +1,166 @@
+# Contributing to the project
+
+First off, thank you for considering contributing to this project. 
+It's people like you that make it a reality for the community.
+
+Below are a set of guidelines for contributing to this project. 
+These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to 
+this document in a pull request.
+
+This is an open source project, and we love to receive contributions from our community — you! 
+There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, 
+submitting bug reports and feature requests or writing code which can be incorporated into the project itself.
+
+## Types of Contributions
+
+You can contribute in many ways:
+
+### Report Bugs
+
+Report bugs at the [issue tracker][issues].
+
+If you are reporting a bug, please include:
+
+- Your operating system name and version.
+- Any details about your local setup that might be helpful in troubleshooting.
+- If you can, provide detailed steps to reproduce the bug.
+- If you don't have steps to reproduce the bug, just note your observations in as much detail as you can.
+  Questions to start a discussion about the issue are welcome.
+
+### Fix Bugs
+
+Look through the GitHub issues for bugs.
+Anything tagged with "bug" is open to whoever wants to implement it.
+
+### Implement Features
+
+Look through the GitHub issues for features.
+Anything tagged with "enhancement" and "please-help" is open to whoever wants to implement it.
+
+Please do not combine multiple feature enhancements into a single pull request.
+
+### Submit Feedback
+
+The best way to send feedback is to file an issue at [issue tracker][issues].
+
+If you are proposing a feature:
+
+- Explain in detail how it would work.
+- Keep the scope as narrow as possible, to make it easier to implement.
+- Remember that this is a volunteer-driven project, and that contributions are welcome :)
+
+## Ground Rules
+
+### Do
+
+* Ensure cross-platform compatibility for every change that's accepted. Windows, Mac, Debian & Ubuntu Linux.
+* Use conventional commits the right way. If you are not familiar with it, please check [this](https://www.conventionalcommits.org/en/v1.0.0/) out.
+* Create issues for any major changes and enhancements that you wish to make. Discuss things transparently and get community feedback.
+* Be welcoming to newcomers and encourage diverse new contributors from all backgrounds.
+
+### Don't
+
+* Misuse the commit messages. They are responsible for determining the correct version and are taken very seriously.
+* Add any form of copyrighted material to the repository.
+* Use any form of offensive language or images in the repository.
+* Make changes that go against the core values of the project.
+
+## Pull Request Guidelines
+
+* Always branch off from `main` when creating a new branch or forking.
+* A Pull Request should address one and only one concern. When you have multiple changes to propose, please create multiple PRs.
+* If the Pull Request adds functionality, the README.md and all documentation should be updated accordingly.
+* Do NOT submit WIP (Work in Progress) pull requests. We only accept PRs that are ready for review. 
+* Pull Requests must have passing CI/CD checks before they can be merged. 
+* If the CI/CD checks fail, please address the issues and push additional commits to the same branch. The PR will not be reviewed until the checks pass.
+
+## Development
+
+This project uses Java with Gradle and [Stonecutter][stonecutter] for development.
+
+
+### Setting up
+
+1. Clone the repository.
+2. Open the project in your favorite IDE.
+3. Run `./gradlew chiseledBuild` to build the project.
+
+If the build is successful, you are ready to start developing. 
+If you encounter any issues, please follow the steps in the error message first and then ask for help in the [Discord server][discord].
+
+The project uses [Stonecutter][stonecutter] for managing different versions of Minecraft within the same codebase and
+[Architectury][architectury] for handling different mod loaders. It's a very delicate ecosystem that is easy to break,
+so please be careful when making changes.
+
+### COMMENTS ARE SPECIAL
+
+We're using [Stonecutter][stonecutter] to manage multiple Minecraft versions and loaders.
+
+Stonecutter enhances the coding process by being a preprocessor for the code. The preprocessor is managed via comments.
+
+DO NOT ASSUME THAT COMMENTED OUT CODE IS DEAD CODE.
+
+It's more likely to be a different Minecraft version/loader path managed by Stonecutter.
+
+## Adding support for a new Minecraft version
+
+The good people at Neoforge publish excellent porting guides.
+Find the version corresponding to the Minecraft version you want to port to, and follow the instructions there. [Minecraft Porting Guide](https://github.com/ChampionAsh5357/neoforged-github/tree/port/26.2/primers)
+
+Alternatively also check the Fabric change posts: https://fabricmc.net/blog/
+
+### Working on specific Minecraft version/loader
+
+We're using [Stonecutter][stonecutter] to manage multiple Minecraft versions and loaders.
+
+#### Switching versions
+
+Gradle has a "Set active project to <version>-<loader>" tasks, those are the ones to use.
+
+The versions are defined in the `settings.gradle.kts` file.
+
+#### Running tasks against the active version
+
+- `./gradlew buildActive` - build just the current active version
+
+### Verifying Changes
+
+#### Quick Check
+
+To make sure that the project tests and builds correctly:
+
+- `./gradlew test buildAndCollect`
+
+### Adding a new minecraft version to the project
+
+One of the main additions to the project is adding a new Minecraft version as mojang releases them.
+Every time a new version is released, we need to set new dependencies and update the mappings at the very least.
+At the worst, we need to completely rewrite sections of the mod to work with the new version of Minecraft.
+
+Fortunately [Stonecutter][stonecutter] makes this process easier by allowing us to have multiple versions of Minecraft in the same codebase.
+The trade-off is that it's a bit more complex to read, but it's worth it in the long run.
+
+To add a new version of Minecraft to the project, follow the steps in the [Minecraft Version Update Runbook](/docs/minecraft-version-update-runbook.md).
+
+### DO NOT
+
+Do not run traditional gradle compile tasks. The project uses a custom build process that includes additional steps beyond compilation. Running standard compile tasks may lead to incomplete builds and test failures.
+
+## Documentation
+
+- For the project, look in the docs folder.
+- For fabric, use: https://docs.fabricmc.net/develop/
+- For neoforge, use: https://docs.neoforged.net/docs/gettingstarted/
+- For Minecraft: use the embedded code itself
+- For Stonecraft: https://stonecraft.meza.gg/
+- For Stonecutter: https://stonecutter.kikugie.dev/wiki/
+- Minecraft version porting guides: https://github.com/ChampionAsh5357/neoforged-github/tree/port/26.2/primers
+
+
+
+---
+
+[issues]: https://github.com/meza/SoundsBeGone/issues
+[stonecutter]: https://stonecutter.kikugie.dev/wiki
+[discord]: https://discord.gg/dvg3tcQCPW
+[architectury]: https://docs.architectury.dev/

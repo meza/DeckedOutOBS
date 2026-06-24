@@ -68,12 +68,12 @@ public class DeckedOutOBS implements ClientModInitializer {
         }
 
         if (this.client.player != null) {
-            this.client.player.displayClientMessage(Component.translatable("decked-out-obs.message.server_started", settings.getPort()), false);
-            this.client.player.displayClientMessage(Component.translatable("decked-out-obs.message.obs_source", "http://localhost:" + settings.getPort()), false);
+            this.client.player.sendSystemMessage(Component.translatable("decked-out-obs.message.server_started", settings.getPort()));
+            this.client.player.sendSystemMessage(Component.translatable("decked-out-obs.message.obs_source", "http://localhost:" + settings.getPort()));
         }
 
         if (!tickRegistered) {
-            ClientTickEvents.END_WORLD_TICK.register(audioEvent::processBlocks);
+            ClientTickEvents.END_LEVEL_TICK.register(audioEvent::processBlocks);
             tickRegistered = true;
         }
 
