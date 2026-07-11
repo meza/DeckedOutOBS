@@ -57,7 +57,7 @@ jobs:
       - name: "🏗️ Build & Release"
         id: release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           DO_PUBLISH: steps.get-next-version.outputs.new-release-published
           MODRINTH_ID: ${{ vars.MODRINTH_ID }}
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
