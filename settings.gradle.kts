@@ -27,8 +27,9 @@ stonecutter {
 
         mc("26.1", "fabric")
         mc("26.2", "fabric")
+        mc("26.3", "fabric")
 
-        vcsVersion = "26.2-fabric"
+        vcsVersion = "26.3-fabric"
     }
     create(rootProject)
 }

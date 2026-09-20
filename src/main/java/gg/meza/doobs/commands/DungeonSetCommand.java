@@ -12,6 +12,10 @@ import net.minecraft.commands.arguments.coordinates.WorldCoordinates;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+//? >= 26.3 {
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.permissions.PermissionSet;
+//? }
 import net.minecraft.world.level.block.RedstoneTorchBlock;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.argument;
@@ -46,7 +50,11 @@ public class DungeonSetCommand {
 
     // Client version of BlockPosArgument.getBlockPos
     private static BlockPos getBlockPos(CommandContext<FabricClientCommandSource> context, String name) {
-        CommandSourceStack s = new CommandSourceStack(null, context.getSource().getPosition(), context.getSource().getRotation(), null, perm -> false, null, null, null, null);
+        //? >= 26.3 {
+        CommandSourceStack s = new CommandSourceStack(null, context.getSource().getPosition(), context.getSource().getRotation(), null, PermissionSet.NO_PERMISSIONS, (MinecraftServer) null, null);
+        //? } else {
+        /*CommandSourceStack s = new CommandSourceStack(null, context.getSource().getPosition(), context.getSource().getRotation(), null, perm -> false, null, null, null, null);*/
+        //? }
 
         return context.getArgument(name, WorldCoordinates.class).getBlockPos(s);
     }
